@@ -31,8 +31,8 @@ jobs:
         run: npm run build
       - name: Preparar GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Liberar arquivos internos do framework
+        run: touch dist/client/.nojekyll
       - name: Enviar arquivos publicados
         uses: actions/upload-pages-artifact@v3
         with:
