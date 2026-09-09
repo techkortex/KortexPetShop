@@ -31,8 +31,11 @@ jobs:
         run: npm run build
       - name: Preparar GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Liberar arquivos internos do framework
-        run: touch dist/client/.nojekyll
+      - name: Compatibilizar arquivos com o GitHub Pages
+        run: |
+          mv dist/client/_next dist/client/assets
+          find dist/client -type f \( -name '*.html' -o -name '*.rsc' -o -name '*.js' -o -name '*.css' -o -name '*.json' \) -exec sed -i 's|/KortexPetShop/_next/|/KortexPetShop/assets/|g' {} +
+          touch dist/client/.nojekyll
       - name: Enviar arquivos publicados
         uses: actions/upload-pages-artifact@v3
         with:
