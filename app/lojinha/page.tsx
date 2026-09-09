@@ -4,6 +4,7 @@ import { SiteFooter, WhatsAppFloat } from '@/components/site-footer';
 import { Shop } from '@/components/shop';
 
 export const metadata: Metadata = { title: 'Lojinha | KortexPetShop', description: 'Rações, petiscos, brinquedos e acessórios escolhidos pela equipe Kortex.' };
+export const dynamic = 'force-static';
 
 export default function ShopPage(){
   return <main><SiteHeader shop/><Shop/><SiteFooter/><WhatsAppFloat/></main>;

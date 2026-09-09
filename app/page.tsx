@@ -1,10 +1,12 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, Bath, Bone, CalendarCheck, ChevronRight, Clock3, HeartPulse, Hotel, MessageCircle, Quote, ShieldCheck, Sparkles, Stethoscope, Syringe, UserRoundCheck } from 'lucide-react';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter, WhatsAppFloat } from '@/components/site-footer';
+import { assetPath, pagePath } from '@/lib/site';
 
 const whatsapp = (message: string) => `https://wa.me/5511945461252?text=${encodeURIComponent(message)}`;
+
+export const dynamic = 'force-static';
 
 const services = [
   { icon: Bath, n:'01', title:'Banho & tosa', text:'Banhos sem pressa, produtos adequados à pele e cortes que respeitam o estilo — e os limites — de cada pet.', action:'Quero agendar banho e tosa para o meu pet.' },
@@ -38,7 +40,7 @@ export default function Home() {
       </div>
       <div className="hero-art">
         <div className="art-sticker">Cuidado<br/><strong>de verdade</strong></div>
-        <Image src="/images/kortex-hero.png" alt="Cachorro caramelo e gato cinza, mascotes da KortexPetShop" fill priority sizes="(max-width: 760px) 100vw, 52vw"/>
+        <Image src={assetPath('/images/kortex-hero.png')} alt="Cachorro caramelo e gato cinza, mascotes da KortexPetShop" fill priority sizes="(max-width: 760px) 100vw, 52vw"/>
         <Sparkles className="scribble" aria-hidden="true"/>
       </div>
     </section>
@@ -49,7 +51,7 @@ export default function Home() {
 
     <section id="historia" className="story section-shell">
       <div className="story-art">
-        <Image src="/images/kortex-care.png" alt="Profissionais da Kortex cuidando de um cão e um gato" width={1456} height={1088} sizes="(max-width: 760px) 90vw, 48vw"/>
+        <Image src={assetPath('/images/kortex-care.png')} alt="Profissionais da Kortex cuidando de um cão e um gato" width={1456} height={1088} sizes="(max-width: 760px) 90vw, 48vw"/>
         <div className="year-seal"><strong>desde</strong><b>2018</b><span>em cada história</span></div>
       </div>
       <div className="story-copy">
@@ -100,9 +102,9 @@ export default function Home() {
     </section>
 
     <section className="gallery-section">
-      <div className="gallery-heading section-shell"><div><p className="kicker">Mural de focinhos</p><h2>Quem passou por aqui.</h2></div><Link className="text-link" href="/lojinha">Visitar a lojinha <ArrowUpRight size={17}/></Link></div>
+      <div className="gallery-heading section-shell"><div><p className="kicker">Mural de focinhos</p><h2>Quem passou por aqui.</h2></div><a className="text-link" href={pagePath('/lojinha')}>Visitar a lojinha <ArrowUpRight size={17}/></a></div>
       <div className="pet-gallery" aria-label="Galeria de animais atendidos">
-        {['Joca','Mingau','Lola','Pingo','Teca','Nino'].map((name,i)=><figure className={`pet-shot shot-${i+1}`} key={name}><span/><figcaption>{name}<small>{i%2 ? 'consulta em dia' : 'dia de Kortex'}</small></figcaption></figure>)}
+        {['Joca','Mingau','Lola','Pingo','Teca','Nino'].map((name,i)=><figure className={`pet-shot shot-${i+1}`} key={name}><span style={{backgroundImage:`url(${assetPath(i===1||i===2||i===4?'/images/kortex-care.png':'/images/kortex-hero.png')})`}}/><figcaption>{name}<small>{i%2 ? 'consulta em dia' : 'dia de Kortex'}</small></figcaption></figure>)}
       </div>
     </section>
 
